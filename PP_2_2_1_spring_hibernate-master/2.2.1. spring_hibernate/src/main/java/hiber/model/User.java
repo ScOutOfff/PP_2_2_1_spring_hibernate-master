@@ -1,15 +1,12 @@
 package hiber.model;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
 
-   @OneToOne(mappedBy = "user")
-   @Cascade(org.hibernate.annotations.CascadeType.ALL)
+   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
    private Car car;
 
    @Id
@@ -31,6 +28,12 @@ public class User {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
+   }
+   public User(String firstName, String lastName, String email, Car car) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.car = car;
    }
 
    public Car getCar() {
