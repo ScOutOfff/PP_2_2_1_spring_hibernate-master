@@ -16,25 +16,25 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      User john = new User("John", "Favro", "user1@mail.ru");
-      User jeck = new User("Jeck", "Favro", "user2@mail.ru");
-      User igor = new User("Igor", "Favro", "user3@mail.ru");
-      User vasya = new User("Vasya", "Favro", "user4@mail.ru");
+      User user1 = new User("John", "Favro", "user1@mail.ru");
+      User user2 = new User("Jeck", "Favro", "user2@mail.ru");
+      User user3 = new User("Igor", "Favro", "user3@mail.ru");
+      User user4 = new User("Vasya", "Favro", "user4@mail.ru");
 
-      Car audi = new Car(john, 1, "Audi");
-      Car bmw = new Car(jeck, 2, "BMW");
-      Car mers = new Car(igor, 3, "MERS");
-      Car toyota = new Car(vasya, 4, "Toyota");
+      Car car1 = new Car(user1, 1, "Audi");
+      Car car2 = new Car(user2, 2, "BMW");
+      Car car3 = new Car(user3, 3, "MERS");
+      Car car4 = new Car(user4, 4, "Toyota");
 
-      john.setCar(audi);
-      jeck.setCar(bmw);
-      igor.setCar(mers);
-      vasya.setCar(toyota);
+      user1.setCar(car1);
+      user2.setCar(car2);
+      user3.setCar(car3);
+      user4.setCar(car4);
 
-      userService.add(john);
-      userService.add(jeck);
-      userService.add(igor);
-      userService.add(vasya);
+      userService.add(user1);
+      userService.add(user2);
+      userService.add(user3);
+      userService.add(user4);
 
 //      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
 //      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
@@ -49,6 +49,7 @@ public class MainApp {
          System.out.println("Email = "+user.getEmail());
          System.out.println();
       }
+
 
       context.close();
    }

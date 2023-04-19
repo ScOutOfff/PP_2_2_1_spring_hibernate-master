@@ -8,11 +8,12 @@ import java.io.Serializable;
 @Entity
 @Table(name = "car")
 public class Car implements Serializable {
-    @Id
     @OneToOne
     @JoinColumn()
     private User user;
 
+    @Id
+    @JoinColumn(name = "series", referencedColumnName = "id")
     private int series;
     private String model;
 
@@ -53,7 +54,7 @@ public class Car implements Serializable {
     @Override
     public String toString() {
         return "Car{" +
-                "user=" + user +
+                "user=" + user.getFirstName() +
                 ", series=" + series +
                 ", model='" + model + '\'' +
                 '}';
