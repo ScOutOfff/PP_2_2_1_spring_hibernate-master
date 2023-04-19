@@ -1,13 +1,15 @@
 package hiber.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
 
-   @OneToOne
-   @JoinColumn
+   @OneToOne(mappedBy = "user")
+   @Cascade(org.hibernate.annotations.CascadeType.ALL)
    private Car car;
 
    @Id
@@ -29,6 +31,14 @@ public class User {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
+   }
+
+   public Car getCar() {
+      return car;
+   }
+
+   public void setCar(Car car) {
+      this.car = car;
    }
 
    public Long getId() {
