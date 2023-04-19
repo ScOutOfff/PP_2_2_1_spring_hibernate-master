@@ -18,17 +18,22 @@ public class MainApp {
 
       userService.deleteAllUsers();
 
-      User user1 = new User("John", "Favro", "user1@mail.ru");
-      User user2 = new User("Jeck", "Favro", "user2@mail.ru");
-      User user3 = new User("Igor", "Favro", "user3@mail.ru");
-      User user4 = new User("Vasya", "Favro", "user4@mail.ru");
+      User user1 = new User("John", "Favreau", "user1@mail.ru");
+      User user2 = new User("Jack", "Favreau", "user2@mail.ru");
+      User user3 = new User("Igor", "Favreau", "user3@mail.ru");
+      User user4 = new User("Vasya", "Favreau", "user4@mail.ru");
 
-//      Car car1 = new Car(user1, 1, "Audi");
-//      Car car2 = new Car(user2, 2, "BMW");
-//      Car car3 = new Car(user3, 3, "MERS");
-//      Car car4 = new Car(user4, 4, "Toyota");
+//      Car car1 = new Car(1, "Audi");
+//      Car car2 = new Car(2, "BMW");
+//      Car car3 = new Car(3, "MERS");
+//      Car car4 = new Car(4, "Toyota");
 
-      user1.setCar(new Car(user1, 1, "Audi"));
+//      userService.add(new User("John", "Favreau", "user1@mail.ru", car1));
+//      userService.add(new User("Jack", "Favreau", "user1@mail.ru", car2));
+//      userService.add(new User("Igor", "Favreau", "user1@mail.ru", car3));
+//      userService.add(new User("Vasya", "Favreau", "user1@mail.ru", car4));
+
+      user1.setCar(new Car(user1, 41, "Audi"));
       user2.setCar(new Car(user2, 2, "BMW"));
       user3.setCar(new Car(user3, 3, "MERS"));
       user4.setCar(new Car(user4, 4, "Toyota"));
@@ -39,6 +44,7 @@ public class MainApp {
       userService.add(user4);
 
       List<User> users = userService.listUsers();
+
       for (User user : users) {
          System.out.println(user.toString());
       }
@@ -53,6 +59,9 @@ public class MainApp {
 //      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
 
       System.out.println(userService.getUserByCar(cars.get(0)));
+      System.out.println(userService.getUserByCar(cars.get(2)));
+      System.out.println(userService.getUserByCar(cars.get(1)));
+      System.out.println(userService.getUserByCar(cars.get(3)));
 
 
 

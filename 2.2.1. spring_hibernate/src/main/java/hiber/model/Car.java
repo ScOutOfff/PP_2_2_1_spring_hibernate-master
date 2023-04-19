@@ -1,8 +1,5 @@
 package hiber.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -23,6 +20,10 @@ public class Car implements Serializable {
 
     }
 
+    public Car(int series, String model) {
+        this.series = series;
+        this.model = model;
+    }
     public Car(User user, int series, String model) {
         this.user = user;
         this.series = series;
