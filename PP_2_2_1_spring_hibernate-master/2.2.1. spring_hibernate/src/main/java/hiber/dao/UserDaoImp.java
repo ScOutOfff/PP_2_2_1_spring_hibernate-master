@@ -10,15 +10,14 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Queue;
 
 @Repository
-@Transactional
 public class UserDaoImp implements UserDao {
 
    @Autowired
    private SessionFactory sessionFactory;
 
+   @Transactional
    @Override
    public void add(User user) {
       sessionFactory.getCurrentSession().save(user);
@@ -36,12 +35,14 @@ public class UserDaoImp implements UserDao {
       return query.getResultList();
    }
 
+   @Transactional
    @Override
    @SuppressWarnings("unchecked")
    public List<Car> listCars() {
       TypedQuery<Car> query=sessionFactory.getCurrentSession().createQuery("from Car");
       return query.getResultList();
    }
+   @Transactional
    @Override
    public void deleteAllUsers() {
       List<User> userList = listUsers();
@@ -50,6 +51,7 @@ public class UserDaoImp implements UserDao {
       }
    }
 
+   @Transactional
    @Override
    @SuppressWarnings("unchecked")
    public User getUserByCar(Car car) {
