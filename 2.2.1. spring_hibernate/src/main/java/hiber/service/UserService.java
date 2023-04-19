@@ -11,4 +11,7 @@ public interface UserService {
     List<User> listUsers();
     List<Car> listCars();
 
+    User getUserByCar(String model, int series);
+
+    void deleteAllUsers();
 }

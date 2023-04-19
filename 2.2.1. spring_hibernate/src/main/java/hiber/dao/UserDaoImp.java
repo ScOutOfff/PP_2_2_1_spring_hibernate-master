@@ -6,10 +6,14 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Queue;
 
 @Repository
+@Transactional
 public class UserDaoImp implements UserDao {
 
    @Autowired
@@ -38,5 +42,33 @@ public class UserDaoImp implements UserDao {
       TypedQuery<Car> query=sessionFactory.getCurrentSession().createQuery("from Car");
       return query.getResultList();
    }
+   @Override
+   public void deleteAllUsers() {
+      List<User> userList = listUsers();
+      for (User user: userList) {
+         sessionFactory.getCurrentSession().delete(user);
+      }
+   }
+
+   @Override
+   @SuppressWarnings("unchecked")
+   public User getUserByCar(String model, int series) {
+      TypedQuery<Car> query = sessionFactory.getCurrentSession()
+              .createQuery("FROM Car WHERE model=:model AND series=:series")
+              .setParameter("model",model)
+              .setParameter("series", series);
+      List<Car> carList = query.getResultList();
+      if (!carList.isEmpty()) {
+         Car car = carList.get(0);
+         List<User> userList = listUsers();
+         User user = userList.stream()
+                 .filter(x -> x.getCar().equals(car))
+                 .findFirst()
+                 .orElse(null);
+         return user;
+      }
+      return null;
+   }
+
 
 }
