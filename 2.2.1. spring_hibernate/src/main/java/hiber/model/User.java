@@ -8,8 +8,7 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-   @OneToOne(mappedBy = "user")
-   @Cascade(org.hibernate.annotations.CascadeType.ALL)
+   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
    private Car car;
 
    @Id

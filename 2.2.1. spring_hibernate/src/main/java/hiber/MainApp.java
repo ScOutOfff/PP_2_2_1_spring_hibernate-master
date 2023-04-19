@@ -23,15 +23,15 @@ public class MainApp {
       User user3 = new User("Igor", "Favro", "user3@mail.ru");
       User user4 = new User("Vasya", "Favro", "user4@mail.ru");
 
-      Car car1 = new Car(user1, 1, "Audi");
-      Car car2 = new Car(user2, 2, "BMW");
-      Car car3 = new Car(user3, 3, "MERS");
-      Car car4 = new Car(user4, 4, "Toyota");
+//      Car car1 = new Car(user1, 1, "Audi");
+//      Car car2 = new Car(user2, 2, "BMW");
+//      Car car3 = new Car(user3, 3, "MERS");
+//      Car car4 = new Car(user4, 4, "Toyota");
 
-      user1.setCar(car1);
-      user2.setCar(car2);
-      user3.setCar(car3);
-      user4.setCar(car4);
+      user1.setCar(new Car(user1, 1, "Audi"));
+      user2.setCar(new Car(user2, 2, "BMW"));
+      user3.setCar(new Car(user3, 3, "MERS"));
+      user4.setCar(new Car(user4, 4, "Toyota"));
 
       userService.add(user1);
       userService.add(user2);
@@ -52,7 +52,7 @@ public class MainApp {
 //      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
 //      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
 
-      System.out.println(userService.getUserByCar("Audi", 1));
+      System.out.println(userService.getUserByCar(cars.get(0)));
 
 
 
