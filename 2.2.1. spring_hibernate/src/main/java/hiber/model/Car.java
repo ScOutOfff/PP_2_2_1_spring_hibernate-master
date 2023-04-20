@@ -3,15 +3,15 @@ package hiber.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**Columns - series and model*/
+
 @Entity
-@Table(name = "car")
+@Table(name = "cars")
 public class Car implements Serializable {
-    @Id
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
     private User user;
 
-    @Column(name = "series")
+    @Id
     private int series;
 
     private String model;
@@ -56,9 +56,8 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "user=" + user.getFirstName() +
-                ",\nseries=" + series +
-                ",\nmodel='" + model +
+        return "model - " + model +
+                "\nseries - " + series +
                 '\n';
     }
 }

@@ -2,11 +2,14 @@ package hiber.model;
 
 import javax.persistence.*;
 
+/**Columns - id, fN, lN, email, carSeries*/
+
 @Entity
 @Table(name = "users")
 public class User {
 
-   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+   @OneToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name = "car_series", referencedColumnName = "series")
    private Car car;
 
    @Id
@@ -79,9 +82,9 @@ public class User {
    @Override
    public String toString() {
       return  "id=" + id +
-              ",\nfirstName='" + firstName +
-              ",\nlastName='" + lastName +
-              ",\nemail='" + email +
+              "\nfirstName= " + firstName +
+              "\nlastName= " + lastName +
+              "\nemail= " + email +
               '\n';
    }
 }

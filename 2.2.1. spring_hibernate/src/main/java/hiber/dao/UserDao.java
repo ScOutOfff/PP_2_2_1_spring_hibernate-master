@@ -7,10 +7,7 @@ import java.util.List;
 
 public interface UserDao {
    void add(User user);
-   void add(Car car);
    List<User> listUsers();
-
-   List<Car> listCars();
 
    User getUserByCar(Car car);
 
