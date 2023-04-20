@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Queue;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -23,11 +24,7 @@ public class UserDaoImp implements UserDao {
       sessionFactory.getCurrentSession().save(user);
    }
 
-   @Override
-   public void add(Car car) {
-      sessionFactory.getCurrentSession().save(car);
-   }
-
+   @Transactional
    @Override
    @SuppressWarnings("unchecked")
    public List<User> listUsers() {
@@ -35,14 +32,6 @@ public class UserDaoImp implements UserDao {
       return query.getResultList();
    }
 
-   @Transactional
-   @Override
-   @SuppressWarnings("unchecked")
-   public List<Car> listCars() {
-      TypedQuery<Car> query=sessionFactory.getCurrentSession().createQuery("from Car");
-      return query.getResultList();
-   }
-   @Transactional
    @Override
    public void deleteAllUsers() {
       List<User> userList = listUsers();
@@ -55,21 +44,10 @@ public class UserDaoImp implements UserDao {
    @Override
    @SuppressWarnings("unchecked")
    public User getUserByCar(Car car) {
-      TypedQuery<Car> query = sessionFactory.getCurrentSession()
-              .createQuery("FROM Car WHERE model=:model AND series=:series")
-              .setParameter("model",car.getModel())
+      TypedQuery<User> query = sessionFactory.getCurrentSession()
+              .createQuery("FROM User WHERE car_series=:series")
               .setParameter("series", car.getSeries());
-      List<Car> carList = query.getResultList();
-      if (!carList.isEmpty()) {
-         Car findCar = carList.get(0);
-         List<User> userList = listUsers();
-         User user = userList.stream()
-                 .filter(x -> x.getCar().equals(findCar))
-                 .findFirst()
-                 .orElse(null);
-         return user;
-      }
-      return null;
+      return query.getSingleResult();
    }
 
 
