@@ -3,7 +3,7 @@ package hiber.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**Columns - series and model*/
+/**Columns - surrogat id series and model*/
 
 @Entity
 @Table(name = "cars")
@@ -12,12 +12,20 @@ public class Car implements Serializable {
     private User user;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JoinColumn(name = "id", foreignKey = @ForeignKey(name = "car_id"))
+    private Long id;
+
     private int series;
 
     private String model;
 
     public Car() {
 
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Car(int series, String model) {

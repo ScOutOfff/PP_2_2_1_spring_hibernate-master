@@ -3,10 +3,10 @@ package hiber.dao;
 import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -32,6 +32,7 @@ public class UserDaoImp implements UserDao {
       return query.getResultList();
    }
 
+   @Transactional
    @Override
    public void deleteAllUsers() {
       List<User> userList = listUsers();
@@ -45,8 +46,9 @@ public class UserDaoImp implements UserDao {
    @SuppressWarnings("unchecked")
    public User getUserByCar(Car car) {
       TypedQuery<User> query = sessionFactory.getCurrentSession()
-              .createQuery("FROM User WHERE car_series=:series")
-              .setParameter("series", car.getSeries());
+              .createQuery("FROM User user LEFT OUTER JOIN FETCH user.car car WHERE car.series=:series AND car.model=:model")
+              .setParameter("series", car.getSeries())
+              .setParameter("model", car.getModel());
       return query.getSingleResult();
    }
 

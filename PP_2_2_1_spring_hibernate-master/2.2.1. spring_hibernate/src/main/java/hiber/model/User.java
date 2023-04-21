@@ -2,14 +2,14 @@ package hiber.model;
 
 import javax.persistence.*;
 
-/**Columns - id, fN, lN, email, carSeries*/
+/**Columns - id, fN, lN, email, foreighKey*/
 
 @Entity
 @Table(name = "users")
 public class User {
 
    @OneToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "car_series", referencedColumnName = "series")
+   @JoinColumn(name = "car_id", referencedColumnName = "id")
    private Car car;
 
    @Id
